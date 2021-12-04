@@ -1,9 +1,11 @@
+from utils import transpose
+
 data = open("03.txt").read().splitlines()
 matrix = [[int(bit) for bit in line] for line in data]
 
 
 def get_most_common_arr(matrix, least_common):
-    matrix_t = [*zip(*matrix)]
+    matrix_t = transpose(matrix)
     most_common_arr = [
         int(sum(bit_column) >= (len(bit_column) / 2)) for bit_column in matrix_t
     ]
