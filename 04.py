@@ -21,17 +21,14 @@ def part1():
 
 
 def part2():
+    winners = []
     not_winners = boards
     picked = []
-    while len(not_winners) > 1:
+    while not_winners:
         picked.append(numbers[len(picked)])
-        not_winners = [board for board in boards if not is_winner(board, picked)]
-
-    last_to_win = not_winners[0]
-    while not is_winner(last_to_win, picked):
-        picked.append(numbers[len(picked)])
-
-    return picked[-1] * sum(n for n in unsplit(last_to_win) if n not in picked)
+        winners.extend(board for board in not_winners if is_winner(board, picked))
+        not_winners = [board for board in not_winners if not is_winner(board, picked)]
+    return picked[-1] * sum(n for n in unsplit(winners[-1]) if n not in picked)
 
 
 print(part1())
