@@ -1,4 +1,4 @@
-from utils import split, transpose, unsplit
+from utils import split, transpose, flatten
 
 data = open("04.txt").read().splitlines()
 numbers = [int(n) for n in data[0].split(",")]
@@ -17,7 +17,7 @@ def part1():
     while not winner:
         picked.append(numbers[len(picked)])
         winner = next((board for board in boards if is_winner(board, picked)), None)
-    return picked[-1] * sum(n for n in unsplit(winner) if n not in picked)
+    return picked[-1] * sum(n for n in flatten(winner) if n not in picked)
 
 
 def part2():
@@ -28,7 +28,7 @@ def part2():
         picked.append(numbers[len(picked)])
         winners.extend(board for board in not_winners if is_winner(board, picked))
         not_winners = [board for board in not_winners if not is_winner(board, picked)]
-    return picked[-1] * sum(n for n in unsplit(winners[-1]) if n not in picked)
+    return picked[-1] * sum(n for n in flatten(winners[-1]) if n not in picked)
 
 
 print(part1())
