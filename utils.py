@@ -27,3 +27,14 @@ def flatten(matrix):
     for r in matrix:
         arr.extend(r)
     return arr
+
+
+def pad(matrix, num, fill=0):
+    def pad_rows(length):
+        return [[fill for _ in range(length)] for _ in range(num)]
+
+    m = pad_rows(len(matrix[0])) + matrix + pad_rows(len(matrix[0]))
+    m_t = transpose(m)
+    m = transpose(pad_rows(len(m)) + m_t + pad_rows(len(m)))
+
+    return m
