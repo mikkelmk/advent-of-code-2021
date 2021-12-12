@@ -7,10 +7,20 @@ def empty_matrix(n, m=None, fill=0):
     return [[fill for _ in range(m)] for _ in range(n)]
 
 
+def deep_copy(matrix):
+    return mmap(matrix, lambda x: x)
+
+
 def mmap(matrix, fn):
     n = len(matrix)
     m = len(matrix[0])
     return [[fn(matrix[i][j]) for j in range(m)] for i in range(n)]
+
+
+def mmap_inplace(matrix, fn):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            matrix[i][j] = fn(matrix[i][j])
 
 
 def split(arr, size):
