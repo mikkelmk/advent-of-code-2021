@@ -1,5 +1,5 @@
 def transpose(matrix):
-    return [*zip(*matrix)]
+    return [list(x) for x in [*zip(*matrix)]]
 
 
 def empty_matrix(n, m=None, fill=0):
